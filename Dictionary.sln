@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary", "Dictionary\Dictionary.csproj", "{7317C469-D0EE-417A-973E-CA42E9A50565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineDictionary", "OnlineDictionary\OnlineDictionary.csproj", "{0070A538-8701-4849-8B34-8C0B6C4773B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7317C469-D0EE-417A-973E-CA42E9A50565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7317C469-D0EE-417A-973E-CA42E9A50565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7317C469-D0EE-417A-973E-CA42E9A50565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7317C469-D0EE-417A-973E-CA42E9A50565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0070A538-8701-4849-8B34-8C0B6C4773B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0070A538-8701-4849-8B34-8C0B6C4773B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0070A538-8701-4849-8B34-8C0B6C4773B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0070A538-8701-4849-8B34-8C0B6C4773B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EF63CDE-8C91-4087-B00B-7B3F258C2379}
+	EndGlobalSection
+EndGlobal
