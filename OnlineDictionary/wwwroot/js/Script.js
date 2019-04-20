@@ -2,24 +2,86 @@
     pagination: true,
     columns: [{
         field: 'id',
-        title: 'Item ID'
+        title: 'Id'
     }, {
-        field: 'name',
-        title: 'Item Name'
+        field: 'word',
+        title: 'Word'
     }, {
-        field: 'price',
-        title: 'Item Price'
-    }],
-    data: [{
-        id: 1,
-        name: 'Item 1',
-        price: '$1'
+        field: 'description',
+        title: 'Description'
     }, {
-        id: 2,
-        name: 'Item 2',
-        price: '$2'
+        field: 'verbose',
+        title: 'Verbose'
+    }, {
+        field: 'pos',
+        title: 'Part Of Speech'
+    }, {
+        field: 'operate',
+        title: 'Action',
+        align: 'center',
+        valign: 'middle',
+        clickToSelect: false,
+            formatter: function (value, row, index) {
+                return '<button class=\'btn btn-primary \' onClick="onWordEdit(' + row.id + ');" >Edit</button> | <button class=\'btn btn-danger \' onClick="onWordDelete(' + row.id +');" >Delete</button> ';
+        }
     }]
 });
+let isEditWordModalOpen = false;
+let wordData = [];
+let currentSelectedWordId = -1;
+
+const onWordDelete = (id) => {
+    $.ajax({
+        url: `admin/DeactivateWord/${id}`,
+        type: "get",
+        success: (data) => {
+            getAllWord();
+        },
+        error: (error) => {
+            alert('Failed');
+            console.log(error);
+        }
+    });
+};
+
+const onWordEdit = (id) => {
+    isEditWordModalOpen = true;
+    $('#wordEditTitle').text('Edit Word');
+    $("#wordWrapper").modal({
+        escapeClose: false,
+        clickClose: false,
+        showClose: false
+    });
+    let selectedWord = wordData.filter((word) => parseInt(word.id, 10) === parseInt(id, 10));
+    if (!selectedWord || selectedWord.length <= 0) {
+        alert('Error');
+        return;
+    }
+    selectedWord = selectedWord[0];
+    currentSelectedWordId = selectedWord.id;
+    $("#wordWrapper input[name='word']").val(selectedWord.word);
+    $("#wordWrapper textarea[name='description']").val(selectedWord.description);
+    $("#wordWrapper input[name='pos']").val(selectedWord.pos);
+    $("#wordWrapper input[name='verbose']").val(selectedWord.verbose);
+};
+
+$('#btnAddNewWord').on('click', (e) => {
+    $('#wordEditTitle').text('Add New Word');
+    clearAllModalInput();
+    $("#wordWrapper").modal({
+        escapeClose: false,
+        clickClose: false,
+        showClose: false
+    });
+});
+
+const clearAllModalInput = () => {
+    $("#wordWrapper input[name='word']").val('');
+    $("#wordWrapper textarea[name='description']").val('');
+    $("#wordWrapper input[name='pos']").val('');
+    $("#wordWrapper input[name='verbose']").val('');
+};
+
 $("#wordWrapper input[name='word']").on('focus', () => {
     $("#wordWrapper input[name='word']").removeClass('red');
     $("#wordWrapper input[name='word']").css({ border: '' });
@@ -70,13 +132,15 @@ const wordSubmitValidation = () => {
     }
     return true;
 };
-
+$("#inputSearchWordAdmin").keyup(_.debounce((e) => {
+    getAllWord($("#inputSearchWordAdmin").val().trim());
+}, 300));
 $("#btnSubmit").on('click', (e) => {
     if (!wordSubmitValidation()) {
         return;
     }
-      $.ajax({
-        url: 'admin/AddWord',
+    $.ajax({
+        url: !isEditWordModalOpen ? 'admin/CreateWord' : `admin/EditWord/${currentSelectedWordId}`,
         type: "post",
         data: {
             word: {
@@ -86,11 +150,32 @@ $("#btnSubmit").on('click', (e) => {
                 Verbose: $("#wordWrapper input[name='verbose']").val()
             }
         },
-        success:  (data) => {
-            console.log(data);
+        success: (data) => {
+            alert('Success');
+            getAllWord();
+            $.modal.close();
+        },
+        error: (error) => {
+            alert('Failed');
+            console.log(error);
+        },
+        complete: (data) => {
+            isEditWordModalOpen = false;
+        }
+    });
+});
+
+const getAllWord = (filter = '') => {
+    $.ajax({
+        url: `admin/GetAllWord/${filter}`,
+        type: "get",
+        success: (result) => {
+            $('#table').bootstrapTable("load", result.data);
+            wordData = result.data;
         },
         error: (error) => {
             console.log(error);
         }
     });
-});
+};
+getAllWord();

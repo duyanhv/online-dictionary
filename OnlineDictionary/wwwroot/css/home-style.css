@@ -1,0 +1,26 @@
+﻿#wordWrapper span {
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 20px;
+}
+#wordWrapper span:hover{
+    background-color: #969696;
+}
+#wordWrapper {
+    height: 600px;
+    position: relative;
+    overflow: scroll;
+    display: block;
+}
+.word-search-wrapper {
+    padding: 0;
+}
+
+.word-detail-wrapper{
+}
+
+.word-detail-header {
+    font-size: 45px;
+    font-weight: 600;
+}

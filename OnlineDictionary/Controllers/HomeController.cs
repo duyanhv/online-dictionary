@@ -5,14 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineDictionary.Models;
+using OnlineDictionary.Service;
 
 namespace OnlineDictionary.Controllers
 {
     public class HomeController : Controller
     {
+        private IWordService _wordService;
+        public HomeController(IWordService wordService)
+        {
+            _wordService = wordService;
+        }
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetAllWord(string id)
+        {
+            var result = _wordService.GetAll(id);
+            return Json(new { Data = result });
         }
 
         public IActionResult About()

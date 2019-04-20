@@ -18,14 +18,37 @@ namespace OnlineDictionary.Controllers
         }
         public IActionResult Index()
         {
+            var hey = _wordService.GetAll("t");
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddWord(WordModel word)
+        public IActionResult CreateWord(WordModel word)
         {
-            _wordService.GetAll();
-            return Json(new { success = true });
+            bool result = _wordService.Create(word);
+            return Json(new { success = result });
+        }
+
+
+        [HttpPost]
+        public IActionResult EditWord(string id, WordModel word)
+        {
+            bool result = _wordService.Edit(id, word);
+            return Json(new { success = result });
+        }
+
+        [HttpGet]
+        public IActionResult DeactivateWord(string id)
+        {
+            bool result = _wordService.Deactivate(id);
+            return Json(new { success = result });
+        }
+
+        [HttpGet]
+        public IActionResult GetAllWord(string id)
+        {
+            var result = _wordService.GetAll(id);
+            return Json(new { Data = result });
         }
     }
 }

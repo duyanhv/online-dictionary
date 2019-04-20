@@ -82,6 +82,7 @@ namespace OnlineDictionary
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseCookiePolicy();
             // global cors policy
             app.UseCors(x => x

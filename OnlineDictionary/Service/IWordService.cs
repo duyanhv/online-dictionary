@@ -9,7 +9,10 @@ namespace OnlineDictionary.Service
     public interface IWordService
     {
         WordModel GetById(int id);
-        List<WordModel> GetAll(string filter = String.Empty);
-
+        List<WordModel> GetAll(string filter = default);
+        bool Create(WordModel data);
+        bool Edit(string id, WordModel data);
+        bool Deactivate(string id);
+        bool Activate(string id);
     }
 }

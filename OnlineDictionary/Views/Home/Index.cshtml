@@ -9,40 +9,44 @@
         padding: 20px;
     }
 </style>
+<!-- Custom fonts for this template-->
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<link href="@Url.Content("~/css/home-style.css")" rel="stylesheet">
 
 <h1>Dictionary</h1>
 <div class="row">
     <div class="col-md-4">
         <div class="word-search-wrapper">
-            <input type="text" name="name" placeholder="search..." value="" />
-            <button>Search</button>
+            <div style="padding:20px;">
+                <input type="text" id="inputWordSearchHome" placeholder="search..." value="" />
+                <button>Search</button>
+            </div>
+            <hr style="border-color:#000; padding: 0 20px" />
+            <div id="wordWrapper">
+            </div>
         </div>
     </div>
-    <div class="col-md-8">  
-        <input type="text" name="name" value="" />
-        <button>Search</button>
+    <div class="col-md-8">
+        <div class="word-detail-wrapper">
+            <p class="word-detail-header"></p>
+            <p class="word-detail-verbose"></p>
+            <p class="word-detail-description"></p>
+        </div>
     </div>
 </div>
-<page ="1">
-    Page 1<p>
 
-        <centered><point26>A.</point26></centered>
+<!-- Bootstrap core JavaScript-->
+<script src="@Url.Content("~/Vendor/jquery/jquery.min.js")"></script>
+<script src="@Url.Content("~/Vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<script src="@Url.Content("~/js/underscore-min.js")"></script>
+<!-- Core plugin JavaScript-->
+<script src="@Url.Content("~/Vendor/jquery-easing/jquery.easing.min.js")"></script>
+<script src="@Url.Content("~/js/underscore-min.js")"></script>
 
-        <h1>A</h1>
-        <Xpage =1>
 
-            <hw>A</hw> <tt>(<it>named \'be in the English, and most commonly \'84 in other languages</it>)</tt>. <def> The first letter of the English and of many other alphabets. The capital A of the alphabets of Middle and Western Europe, as also the small letter (a), besides the forms in Italic, black letter, etc., are all descended from the old Latin A, which was borrowed from the Greek <spn>Alpha</spn>, of the same form; and this was made from the first letter (<i>Aleph</i>, and itself from the Egyptian origin. The <i>Aleph</i> was a consonant letter, with a guttural breath sound that was not an element of Greek articulation; and the Greeks took it to represent their vowel <i>Alpha</i> with the \'84 sound, the Ph\'d2nician alphabet having no vowel symbols.</def>
-
-            This letter, in English, is used for several different vowel sounds. See <i>Guide to pronunciation</i>, §§ 43-74. The regular long <i>a</i>, as in <i>fate</i>, etc., is a comparatively modern sound, and has taken the place of what, till about the early part of the 17th century, was a sound of the quality of \'84 (as in <i>far</i>).
-
-    <p>
-        <b>2.</b> <fld>(Mus.)</fld> <def>The name of the sixth tone in the model major scale (that in C), or the first tone of the minor scale, which is named after it the scale in A minor. The second string of the violin is tuned to the A in the treble staff. -- A sharp (A#) is the name of a musical tone intermediate between A and B. -- A flat (A&flat;) is the name of a tone intermediate between A and G.</def>
-
-        <cs><col>A per se</col> <ety>(L. <ets>per se<ets> by itself)</ety>, <cd>one pre\'89minent; a nonesuch.</cd> <mark>[Obs.]</mark></cs>
-
-        <blockquote>
-            O fair Creseide, the flower and <b>A per se</b>
-
-            Of Troy and Greece.
-            <i>Chaucer.</i>
-        </blockquote>
+<script src="@Url.Content("~/js/HomeScript.js")"></script>

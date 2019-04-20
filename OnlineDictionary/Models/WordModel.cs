@@ -11,5 +11,7 @@ namespace OnlineDictionary.Models
         public string Description { get; set; }
         public string Verbose { get; set; }
         public string Pos { get; set; }
+
+        public string Id { get; set; }
     }
 }

@@ -26,29 +26,16 @@ namespace OnlineDictionary.Service
             new User { Id = 1, Username = "admin", Password = "admin", Role = ROLE_ADMIN },
             new User { Id = 2, Username = "test", Password = "test" }
         };
-        public string Authenticate(string username, string password)
+        public bool Authenticate(LoginModel data)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = _users.SingleOrDefault(x => x.Username == data.Username && x.Password == data.Password);
 
             // return null if user not found
             if (user == null)
-                return null;
-
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+                return false;
+            }
+            return true;
         }
     }
 }
