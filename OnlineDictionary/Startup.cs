@@ -32,7 +32,7 @@ namespace OnlineDictionary
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             // configure strongly typed settings objects
@@ -61,7 +61,9 @@ namespace OnlineDictionary
 
 
             // configure DI for application services
-
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddScoped<IWordService, WordService>();
             services.AddScoped<IUserService, UserService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

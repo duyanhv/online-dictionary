@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineDictionary.Models;
 using OnlineDictionary.Service;
@@ -12,13 +13,26 @@ namespace OnlineDictionary.Controllers
     public class AdminController : Controller
     {
         private IWordService _wordService;
+        private const string SESSION_USERNAME = "Username";
+        private const string SESSION_ROLE = "Role";
+        private bool CheckAuthentication()
+        {
+            if (String.IsNullOrWhiteSpace(HttpContext.Session.GetString(SESSION_USERNAME)) || String.IsNullOrWhiteSpace(HttpContext.Session.GetString(SESSION_ROLE)))
+            {
+                return false;
+            }
+            return true;
+        }
         public AdminController(IWordService wordService)
         {
             _wordService = wordService;
         }
         public IActionResult Index()
         {
-            var hey = _wordService.GetAll("t");
+            if (!CheckAuthentication()) {
+                return Redirect("/Auth/Login");
+            };
+            ViewBag.Username = HttpContext.Session.GetString(SESSION_USERNAME);
             return View();
         }
 

@@ -8,6 +8,6 @@ namespace OnlineDictionary.Service
 {
     public interface IUserService
     {
-        bool Authenticate(LoginModel data);
+        User Authenticate(LoginModel data);
     }
 }

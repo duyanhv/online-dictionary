@@ -26,16 +26,16 @@ namespace OnlineDictionary.Service
             new User { Id = 1, Username = "admin", Password = "admin", Role = ROLE_ADMIN },
             new User { Id = 2, Username = "test", Password = "test" }
         };
-        public bool Authenticate(LoginModel data)
+        public User Authenticate(LoginModel data)
         {
             var user = _users.SingleOrDefault(x => x.Username == data.Username && x.Password == data.Password);
 
             // return null if user not found
             if (user == null)
             {
-                return false;
+                return null;
             }
-            return true;
+            return new User { Username = user.Username, Role = user.Role };
         }
     }
 }
